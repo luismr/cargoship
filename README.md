@@ -9,12 +9,7 @@
 
 `cargoship` is a template for deploying multiple Docker containers with a Traefik-based load balancer and built-in SSL support. It is designed for easy scaling, secure traffic management, and rapid prototyping.
 
-<p align="center">
-  <img src="./cargoship.png" alt="cargoship" width="256"/>
-</p>
-
-
-
+![cargoship](./cargoship.png)
 
 ## Table of Contents
 
