@@ -1,0 +1,37 @@
+services:
+  traefik:
+    container_name: cargoship-traefik
+    restart: unless-stopped
+    image: ${IMAGE_TRAEFIK:-traefik:3.4} 
+    command:
+      - --configFile=/etc/traefik/traefik.yml   
+    ports:
+      - "80:80"      
+      - "443:443"    
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro  
+      - ./config/traefik/traefik.yml:/etc/traefik/traefik.yml:ro      
+      - ./config/traefik/traefik_dynamic.yml:/etc/traefik/traefik_dynamic.yml:ro  
+      - ${TRAEFIK_CERTS_PATH:-./config/certs}:/certs:ro  
+    networks:
+      - cargoship
+  whoami:
+    image: ${IMAGE_WHOAMI:-traefik/whoami:latest}                       # Sample service that returns its request info
+    restart: no
+    environment:
+      - name=value
+    labels:
+      - "traefik.enable=true"  
+      - "traefik.http.routers.whoami.rule=Host(`test.example.com`)"       # Route requests for test.example.com:contentReference[oaicite:0]{index=0}
+      - "traefik.http.routers.whoami.entrypoints=websecure"              # Use the secure HTTPS entrypoint:contentReference[oaicite:1]{index=1}
+      - "traefik.http.routers.whoami.tls=true"                           # Enable TLS for this router:contentReference[oaicite:2]{index=2}:contentReference[oaicite:3]{index=3}
+      - "traefik.http.services.whoami.loadbalancer.server.port=80"       # Service internal port (whoami listens on 80):contentReference[oaicite:4]{index=4}:contentReference[oaicite:5]{index=5}
+    networks:
+      - cargoship
+    depends_on:
+      - traefik
+
+networks:
+  cargoship:
+    driver: bridge

@@ -1,0 +1,25 @@
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+          permanent: true    # Redirect all HTTP to HTTPS (permanent 301):contentReference[oaicite:11]{index=11}
+  websecure:
+    address: ":443"
+
+providers:
+  docker:
+    exposedByDefault: false  # Only containers with traefik.enable=true will be exposed:contentReference[oaicite:12]{index=12}
+  file:
+    filename: "/etc/traefik/traefik_dynamic.yml"  # Load TLS cert configuration from this file:contentReference[oaicite:13]{index=13}
+    watch: true              # Watch for changes in the dynamic config file (reload certificates if updated)
+
+log:
+  level: "INFO"
+
+api:
+  insecure: true
+  dashboard: true
