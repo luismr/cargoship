@@ -16,7 +16,7 @@ config/certs/
 
 # Docker and Docker Compose
 .dockerignore
-docker-compose.override.yml
+docker-compose.override.yml     
 docker-compose.*.yml
 !docker-compose.yml
 
