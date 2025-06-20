@@ -9,7 +9,12 @@
 
 `cargoship` is a template for deploying multiple Docker containers with a Traefik-based load balancer and built-in SSL support. It is designed for easy scaling, secure traffic management, and rapid prototyping.
 
----
+<p align="center">
+  <img src="cargoship.png" alt="cargoship" width="256"/>
+</p>
+
+
+
 
 ## Table of Contents
 
@@ -26,7 +31,7 @@
 6. [Accessing the Traefik Dashboard](#accessing-the-traefik-dashboard)
 7. [References & Further Reading](#references--further-reading)
 
----
+
 
 ## Project Structure
 
@@ -47,7 +52,7 @@ cargoship/
 - **config/traefik/**: Traefik static and dynamic configuration files.
 - **config/certs/**: Place your SSL certificates here.
 
----
+
 
 ## Features
 
@@ -56,7 +61,7 @@ cargoship/
 - **Easy SSL Certificate Management** (manual or with Let's Encrypt).
 - **Traefik Dashboard** for monitoring and debugging.
 
----
+
 
 ## Getting Started
 
@@ -75,7 +80,7 @@ cargoship/
    docker-compose up -d
    ```
 
----
+
 
 ## Configuration
 
@@ -353,7 +358,7 @@ openssl x509 -in config/certs/fullchain.pem -text -noout | grep "Not After"
 
 > **Important**: Ensure your domain's DNS points to the server where this script runs, as Let's Encrypt needs to verify domain ownership during renewal.
 
----
+
 
 ## Scaling Services
 
@@ -369,14 +374,14 @@ Or, using the legacy command:
 docker-compose scale whoami=3
 ```
 
----
+
 
 ## Accessing the Traefik Dashboard
 
 - Visit: [http://localhost:8080](http://localhost:8080)
 - The dashboard is enabled by default for local development.
 
----
+
 
 ## References & Further Reading
 
